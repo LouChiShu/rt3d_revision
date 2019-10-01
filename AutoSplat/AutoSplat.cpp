@@ -652,45 +652,81 @@ void SetBufferPixel(int x, int y, Color c)
 
 int CopyTIM2Buffer(int sourcex, int sourcey, int destx, int desty, int rot)
 {
-
-	Color col = { 0 };
-
-	
-	for (int i = 0; i < 32; i++)
+	switch (rot)
 	{
-		for (int j = 0; j < 32; j++)
+	case 0:
+		for (int i = 0; i < 32; i++)
 		{
-			switch (rot)
+			for (int j = 0; j < 32; j++)
 			{
-			case 0:
-				col = GetPixel(sourcex + i, sourcey + j);
-				break;
-			case 1:
-				col = GetPixel(sourcex + (31 - i), sourcey + j);
-				break;
-			case 2:
-				col = GetPixel(sourcex + j, sourcey + (31 - i));
-				break;
-			case 3:
-				col = GetPixel(sourcex + (31 - j), sourcey + (31 - i));
-				break;
-			case 4:
-				col = GetPixel(sourcex + (31 - i), sourcey + (31 - j));
-				break;
-			case 5:
-				col = GetPixel(sourcex + i, sourcey + (31 - j));
-				break;
-			case 6:
-				col = GetPixel(sourcex + (31 - j), sourcey + i);
-				break;
-			case 7:
-				col = GetPixel(sourcex + j, sourcey + i);
-				break;
+				SetBufferPixel(destx + i, desty + j, GetPixel(sourcex + i, sourcey + j));
 			}
-			SetBufferPixel(destx + i, desty + j, col);
 		}
+		break;
+	case 1:
+		for (int i = 0; i < 32; i++)
+		{
+			for (int j = 0; j < 32; j++)
+			{
+				SetBufferPixel(destx + i, desty + j, GetPixel(sourcex + (31 - i), sourcey + j));
+			}
+		}
+		break;
+	case 2:
+		for (int i = 0; i < 32; i++)
+		{
+			for (int j = 0; j < 32; j++)
+			{
+				SetBufferPixel(destx + i, desty + j, GetPixel(sourcex + j, sourcey + (31 - i)));
+			}
+		}
+		break;
+	case 3:
+		for (int i = 0; i < 32; i++)
+		{
+			for (int j = 0; j < 32; j++)
+			{
+				SetBufferPixel(destx + i, desty + j, GetPixel(sourcex + (31 - j), sourcey + (31 - i)));
+			}
+		}
+		break;
+	case 4:
+		for (int i = 0; i < 32; i++)
+		{
+			for (int j = 0; j < 32; j++)
+			{
+				SetBufferPixel(destx + i, desty + j, GetPixel(sourcex + (31 - i), sourcey + (31 - j)));
+			}
+		}
+		break;
+	case 5:
+		for (int i = 0; i < 32; i++)
+		{
+			for (int j = 0; j < 32; j++)
+			{
+				SetBufferPixel(destx + i, desty + j, GetPixel(sourcex + i, sourcey + (31 - j)));
+			}
+		}
+		break;
+	case 6:
+		for (int i = 0; i < 32; i++)
+		{
+			for (int j = 0; j < 32; j++)
+			{
+				SetBufferPixel(destx + i, desty + j, GetPixel(sourcex + (31 - j), sourcey + i));
+			}
+		}
+		break;
+	case 7:
+		for (int i = 0; i < 32; i++)
+		{
+			for (int j = 0; j < 32; j++)
+			{
+				SetBufferPixel(destx + i, desty + j, GetPixel(sourcex + j, sourcey + i));
+			}
+		}
+		break;
 	}
-
 	return 0;
 }
 
