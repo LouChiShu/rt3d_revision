@@ -652,6 +652,26 @@ void SetBufferPixel(int x, int y, Color c)
 
 int CopyTIM2Buffer(int sourcex, int sourcey, int destx, int desty, int rot)
 {
+	switch (rot)
+	{
+	case 0:
+		break;
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	case 6:
+		break;
+	case 7:
+		break;
+	}
+
 	// TO DO: Implement this function (see slides)	return 0;
 	for (int i = 0; i < 32; i++)
 	{
@@ -681,9 +701,9 @@ int DrawSegments2Buffer(SEGMENT* pSegments, TIM_FILE* pTIMData)
 		for (int j = 0; j < 16; j++)
 		{
 			POLYSTRUCT poly = pSegments[i].strTilePolyStruct[j];
-			int x = segmentX + (j % 4);
-			int y = (j / 4) + (segmentY*64);
-			CopyTIM2Buffer(_TIMXPOS(poly.cTileRef), _TIMYPOS(poly.cTileRef), _MAPXPOS(x), _MAPYPOS(y), poly.cRot);
+			int coord = (((segmentY * 4) + (j / 4)) * 64) + ((segmentX * 4) + (j % 4));
+
+			CopyTIM2Buffer(_TIMXPOS(poly.cTileRef), _TIMYPOS(poly.cTileRef), _MAPXPOS(coord), _MAPYPOS(coord), poly.cRot);
 		}
 	}
 
